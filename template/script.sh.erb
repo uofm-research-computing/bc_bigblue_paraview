@@ -18,9 +18,9 @@ export $(dbus-launch)
 source /etc/os-release
 
 if [[ "$VERSION_ID" < "9" ]]; then
-  xfwm4 --compositor=off --daemon --sm-client-disable
+  xfwm4 --compositor=off --sm-client-disable &
   xsetroot -solid "#D3D3D3"
-  xfsettingsd --sm-client-disable
+  xfsettingsd --sm-client-disable &
   xfce4-panel --sm-client-disable &
 else
   xfwm4 --compositor=off --sm-client-disable &
@@ -37,15 +37,11 @@ module restore
 #
 
 # Load the required environment
-<%- if context.cluster == 'owens' -%>
-module load xalt/latest intel/16.0.3 virtualgl <%= context.auto_modules_paraview %>
-<%- else -%>
-module load xalt/latest virtualgl <%= context.auto_modules_paraview %>
-<%- end -%>
+module load paraview
 
 # Output debug info
 module list
 
 # Launch ParaView
 set -x
-vglrun paraview
+xfce4-terminal -e "paraview" -T "VMD Terminal"
