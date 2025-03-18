@@ -37,11 +37,18 @@ module restore
 #
 
 # Load the required environment
-module load paraview
+
+<%- if context.paraview_module == "desktop" -%>
+        module load paraview
+        set -x
+        xfce4-terminal -e "paraview" -T "Paraview Terminal"
+<%- end -%>
+<%- if context.paraview_module == "openfoam.org-12" -%>
+        source /opt/ohpc/pub/apps/uofm/openfoam.org/12/use 
+        set -x
+        xfce4-terminal -e "paraFoam -empty" -T "Paraview Terminal"
+<%- end -%>
 
 # Output debug info
-module list
 
 # Launch ParaView
-set -x
-xfce4-terminal -e "paraview" -T "VMD Terminal"

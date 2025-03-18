@@ -8,7 +8,14 @@ form:
   - alloc_mem
   - partitions_list
   - bc_vnc_resolution
+  - paraview_module
 attributes:
+  paraview_module:
+    widget: select
+    label: "Paraview Type"
+    options:
+      - [ "5.11.2 Desktop" , "desktop" ]
+      - [ "5.11.2 OpenFoam.org version 12" , "openfoam.org-12" ]
   bc_vnc_resolution:
     required: true
   alloc_mem:
